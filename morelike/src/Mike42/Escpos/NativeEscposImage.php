@@ -12,6 +12,8 @@
 
 namespace Mike42\Escpos;
 
+use Mike42\Escpos\EscposImage;
+
 /**
  * Implementation of EscposImage using only native PHP.
  * TODO: wbmp, pbm, bmp files.

@@ -25,10 +25,8 @@ class Modelo extends CI_Model
         $this->db->select("*");
         $this->db->where("rut", $rut);
         $res = $this->db->get("usuario")->result();
-        /** @noinspection PhpUnusedLocalVariableInspection */
         $super = 0;
         foreach ($res as $row) {
-            /** @noinspection PhpUnusedLocalVariableInspection */
             $super = $row->rol;
         }
         /*if($super == 0){*/
@@ -117,7 +115,6 @@ class Modelo extends CI_Model
     }*/
     function listarAreas()
     {
-    	echo 'Enrando';
         $this->db->select("*");
         $this->db->order_by("estado");
         $this->db->order_by("nombre");
@@ -173,7 +170,6 @@ class Modelo extends CI_Model
     }
     function listarUsers()
     {
-    	echo "Entrando..";
         $this->db->select("*");
         $this->db->where("rol", 0);
         $this->db->order_by("nombre");
@@ -291,7 +287,7 @@ class Modelo extends CI_Model
         $this->db->delete("ua");
         $this->historialIntranet("Tabla: ua - Eliminacion de Link " . $id);
     }
-    function subirFichero($idarea, $cadenaArchivos, $user, $ubicacion, $para)
+    function subirFichero($idarea, $cadenaArchivos, $fecha, $user, $ubicacion, $para)
     {
         $data['area'] = $idarea;
         $data['nombre'] = $cadenaArchivos;

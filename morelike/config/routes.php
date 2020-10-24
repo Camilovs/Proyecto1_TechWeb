@@ -64,4 +64,4 @@ $route['blog/Temas/(:any)'] = "Principal/noticias";
 $route['default_controller'] = "Principal";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['Salida'] = "Principal/logout";
+$route['Salida'] = "Principal/log_out";

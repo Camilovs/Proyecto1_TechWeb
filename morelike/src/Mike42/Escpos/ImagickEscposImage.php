@@ -13,6 +13,7 @@ namespace Mike42\Escpos;
 
 use Exception;
 use Imagick;
+use Mike42\Escpos\EscposImage;
 
 /**
  * Implementation of EscposImage using the Imagick PHP plugin.
@@ -51,12 +52,16 @@ class ImagickEscposImage extends EscposImage
         $this -> setImgData($imgData);
     }
 
-	/**
-	 * @return string[]|NULL
-	 *  Column format data as array, or NULL if optimised renderer isn't
-	 *  available in this implementation.
-	 */
-    protected function getColumnFormatFromFile()
+    /**
+     * @param string $filename
+     *  Filename to load from
+     * @param boolean $highDensityVertical
+     *  True for high density output (24px lines), false for regular density (8px)
+     * @return string[]|NULL
+     *  Column format data as array, or NULL if optimised renderer isn't
+     *  available in this implementation.
+     */
+    protected function getColumnFormatFromFile($filename = null, $highDensityVertical = true)
     {
         if ($filename === null) {
             return null;
@@ -76,17 +81,18 @@ class ImagickEscposImage extends EscposImage
         return $blobs;
     }
 
-	/**
-	 * Load an image from disk, into memory, using Imagick.
-	 *
-	 * @throws Exception if the image format is not supported,
-	 *  or the file cannot be opened.
-	 */
-    protected function loadImageData()
+    /**
+     * Load an image from disk, into memory, using Imagick.
+     *
+     * @param string $filename The filename to load from
+     * @throws Exception if the image format is not supported,
+     *  or the file cannot be opened.
+     */
+    protected function loadImageData($filename = null)
     {
         if ($filename === null) {
             /* Set to blank image */
-            return parent::loadImageData();
+            return parent::loadImageData($filename);
         }
     
         $im = $this -> getImageFromFile($filename);
@@ -172,12 +178,14 @@ class ImagickEscposImage extends EscposImage
         return $subBlob;
     }
 
-	/**
-	 * @return string|NULL
-	 *  Raster format data, or NULL if no optimised renderer is available in
-	 *  this implementation.
-	 */
-    protected function getRasterFormatFromFile()
+    /**
+     * @param string $filename
+     *  Filename to load from
+     * @return string|NULL
+     *  Raster format data, or NULL if no optimised renderer is available in
+     *  this implementation.
+     */
+    protected function getRasterFormatFromFile($filename = null)
     {
         if ($filename === null) {
             return null;

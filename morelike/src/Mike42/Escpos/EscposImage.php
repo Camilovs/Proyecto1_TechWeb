@@ -71,14 +71,14 @@ abstract class EscposImage
      * @var string $filename
      *  Filename of image on disk - null if not loaded from disk.
      */
-    private $filename;
+    private $filename = null;
     
     /**
      * @var boolean $allowOptimisations
      *  True to allow faster library-specific rendering shortcuts, false to always just use
      *  image libraries to read pixels (more reproducible between systems).
      */
-    private $allowOptimisations;
+    private $allowOptimisations = true;
     
     /**
      * Construct a new EscposImage.
@@ -143,13 +143,13 @@ abstract class EscposImage
         }
         if ($this -> allowOptimisations) {
             /* Use optimised code if allowed */
-            $this -> imgRasterData = $this -> getRasterFormatFromFile();
+            $this -> imgRasterData = $this -> getRasterFormatFromFile($this -> filename);
         }
         if ($this -> imgRasterData === null) {
             /* Load in full image and render the slow way if no faster implementation
              is available, or if we've been asked not to use it */
             if ($this -> imgData === null) {
-                $this -> loadImageData();
+                $this -> loadImageData($this -> filename);
             }
             $this -> imgRasterData = $this -> getRasterFormat();
         }
@@ -172,25 +172,26 @@ abstract class EscposImage
         $this -> imgColumnData[$doubleDensity] = null;
         if ($this -> allowOptimisations) {
             /* Use optimised code if allowed */
-            $data = $this -> getColumnFormatFromFile();
+            $data = $this -> getColumnFormatFromFile($this -> filename, $doubleDensity);
             $this -> imgColumnData[$doubleDensity] = $data;
         }
         if ($this -> imgColumnData[$doubleDensity] === null) {
             /* Load in full image and render the slow way if no faster implementation
              is available, or if we've been asked not to use it */
             if ($this -> imgData === null) {
-                $this -> loadImageData();
+                $this -> loadImageData($this -> filename);
             }
             $this -> imgColumnData[$doubleDensity] = $this -> getColumnFormat($doubleDensity);
         }
         return $this -> imgColumnData[$doubleDensity];
     }
 
-	/**
-	 * Load an image from disk. This default implementation always gives a zero-sized image.
-	 *
-	 */
-    protected function loadImageData()
+    /**
+     * Load an image from disk. This default implementation always gives a zero-sized image.
+     *
+     * @param string $filename Filename to load from.
+     */
+    protected function loadImageData($filename = null)
     {
         // Load image in to string of 1's and 0's, also set width & height
         $this -> setImgWidth(0);
@@ -227,24 +228,30 @@ abstract class EscposImage
     {
         $this -> imgHeight = $height;
     }
-
-	/**
-	 * @return string|NULL
-	 *  Raster format data, or NULL if no optimised renderer is available in
-	 *  this implementation.
-	 */
-    protected function getRasterFormatFromFile()
+    
+    /**
+     * @param string $filename
+     *  Filename to load from
+     * @return string|NULL
+     *  Raster format data, or NULL if no optimised renderer is available in
+     *  this implementation.
+     */
+    protected function getRasterFormatFromFile($filename = null)
     {
         // No optimised implementation to provide
         return null;
     }
-
-	/**
-	 * @return string[]|NULL
-	 *  Column format data as array, or NULL if optimised renderer isn't
-	 *  available in this implementation.
-	 */
-    protected function getColumnFormatFromFile()
+    
+    /**
+     * @param string $filename
+     *  Filename to load from
+     * @param boolean $highDensityVertical
+     *  True for high density output (24px lines), false for regular density (8px)
+     * @return string[]|NULL
+     *  Column format data as array, or NULL if optimised renderer isn't
+     *  available in this implementation.
+     */
+    protected function getColumnFormatFromFile($filename = null, $highDensityVertical = true)
     {
         // No optimised implementation to provide
         return null;
@@ -264,8 +271,7 @@ abstract class EscposImage
         $widthPixels = $this -> getWidth();
         $heightPixels = $this -> getHeight();
         $widthBytes = $this -> getWidthBytes();
-		/** @noinspection PhpUnusedLocalVariableInspection */
-		$heightBytes = $this -> getHeightBytes();
+        $heightBytes = $this -> getHeightBytes();
         $x = $y = $bit = $byte = $byteVal = 0;
         $data = str_repeat("\0", $widthBytes * $heightPixels);
         if (strlen($data) == 0) {
@@ -333,10 +339,8 @@ abstract class EscposImage
         // Currently double density in both directions, very experimental
         $widthPixels = $this -> getWidth();
         $heightPixels = $this -> getHeight();
-		/** @noinspection PhpUnusedLocalVariableInspection */
-		$widthBytes = $this -> getWidthBytes();
-		/** @noinspection PhpUnusedLocalVariableInspection */
-		$heightBytes = $this -> getHeightBytes();
+        $widthBytes = $this -> getWidthBytes();
+        $heightBytes = $this -> getHeightBytes();
         $lineHeight = $highDensity ? 3 : 1; // Vertical density. 1 or 3 (for 8 and 24 pixel lines)
         // Initialise to zero
         $x = $y = $bit = $byte = $byteVal = 0;
