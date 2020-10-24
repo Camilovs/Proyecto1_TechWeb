@@ -14,8 +14,10 @@ _Bitacora de registro de cualquier bug. Detallar origen y solución (si es que s
 _Sección destinada para detallar las secciones de codigo que se corrigieron para restaurar el funcionamiento del proyecto._
 
 - NewArea.php, NewUser.php, NewLink.php, nuevoProcedimiento.php, index.php -> Las secciones de codigo de php, incrustadas en hmtl, no contienen las etiquetas de <?php >, por lo tanto se agregaron.
-- nuevoProcedimiento.php **linea 31** -> guardarNuevoProcedimientos() mal escrito, se le quita el caracter "s" del final.
+- nuevoProcedimiento.php -> en button guardarNuevoProcedimientos() mal escrito, se le quita el caracter "s" del final. En button verVusquedas() mal escrito, es verBusquedas().
 - index.php **linea 184** String de path incompleto, faltaba Principal/..
+- routes.php **linea 67** -> Ruta de Salida mal escrita, es Principal/log_out
+- Principal.php **function log_out** -> Mal argumento de redirect, es UsoIntranet no Intranet.
 
 ## Registro de Limpieza de codigo 🧹
 
