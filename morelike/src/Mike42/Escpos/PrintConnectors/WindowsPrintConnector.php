@@ -175,7 +175,7 @@ class WindowsPrintConnector implements PrintConnector
         } elseif ($this -> platform == self::PLATFORM_LINUX) {
             $this -> finalizeLinux($data);
         } else {
-            $this -> finalizeMac();
+            $this -> finalizeMac($data);
         }
     }
 
@@ -233,12 +233,13 @@ class WindowsPrintConnector implements PrintConnector
         }
     }
 
-	/**
-	 * Send job to printer -- platform-specific Mac code.
-	 *
-	 * @throws Exception
-	 */
-    protected function finalizeMac()
+    /**
+     * Send job to printer -- platform-specific Mac code.
+     *
+     * @param string $data Print data
+     * @throws Exception
+     */
+    protected function finalizeMac($data)
     {
         throw new Exception("Mac printing not implemented.");
     }

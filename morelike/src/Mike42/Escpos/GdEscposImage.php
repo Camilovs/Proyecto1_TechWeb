@@ -12,6 +12,7 @@
 
 namespace Mike42\Escpos;
 
+use Mike42\Escpos\EscposImage;
 use Exception;
 
 /**
@@ -19,17 +20,18 @@ use Exception;
  */
 class GdEscposImage extends EscposImage
 {
-	/**
-	 * Load an image from disk, into memory, using GD.
-	 *
-	 * @throws Exception if the image format is not supported,
-	 *  or the file cannot be opened.
-	 */
-    protected function loadImageData()
+    /**
+     * Load an image from disk, into memory, using GD.
+     *
+     * @param string $filename The filename to load from
+     * @throws Exception if the image format is not supported,
+     *  or the file cannot be opened.
+     */
+    protected function loadImageData($filename = null)
     {
         if ($filename === null) {
             /* Set to blank image */
-            return parent::loadImageData();
+            return parent::loadImageData($filename);
         }
         
         $ext = pathinfo($filename, PATHINFO_EXTENSION);

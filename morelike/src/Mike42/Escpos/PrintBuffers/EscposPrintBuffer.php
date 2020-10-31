@@ -97,12 +97,10 @@ class EscposPrintBuffer implements PrintBuffer
             return $this -> writeTextRaw($text);
         }
         $i = 0;
-		/** @noinspection PhpUnusedLocalVariableInspection */
-		$j = 0;
+        $j = 0;
         $len = mb_strlen($text, self::INPUT_ENCODING);
         while ($i < $len) {
-			/** @noinspection PhpUnusedLocalVariableInspection */
-			$matching = true;
+            $matching = true;
             if (($encoding = $this -> identifyText(mb_substr($text, $i, 1, self::INPUT_ENCODING))) === false) {
                 // Un-encodeable text
                 $encoding = $this -> getPrinter() -> getCharacterTable();

@@ -11,6 +11,7 @@
  */
 namespace Mike42\Escpos;
 
+use Mike42\Escpos\CodePage;
 use \InvalidArgumentException;
 
 /**

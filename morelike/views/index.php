@@ -61,7 +61,7 @@
 
 			</div>
 			<div class="col-6 text-right">
-				<text style="color:#128c7e">Bienvenid@ <button type="button" class="btn" style="border:1px solid black;" onclick="openModal()"><?= $this->session->userdata("nombre")?></button></text>
+				<text style="color:#128c7e">Bienvenid@ <button type="button" class="btn" style="border:1px solid black;" onclick="openModal()"><?= $this->session->userdata("nombre") ?></button></text>
 				<a href="Salida" class="btn btn-info"><i class="fas fa-sign-out-alt"></i></a><br><text style="font-size: 9px;color:#34b7f1">Último acceso: <?= $this->session->userdata("acceso") ?></text>
 			</div>
 		</div>
@@ -69,9 +69,9 @@
 			<div class="col-12">
 				<select id="selectCentros" onchange="entrarArea()" style="width: 100%;">
 					<option selected disabled></option>
-					<?php for($i=0;$i<sizeof($this->session->userdata("areas"));$i++):?>
-					<option value="<?= $this->session->userdata("idAreas")[$i]; ?>"><?= $this->session->userdata("areas")[$i]; ?></option>
-					<?php endfor;?>
+					<?php for ($i = 0; $i < sizeof($this->session->userdata("areas")); $i++) : ?>
+						<option value="<?= $this->session->userdata("idAreas")[$i]; ?>"><?= $this->session->userdata("areas")[$i]; ?></option>
+					<?php endfor; ?>
 				</select>
 			</div>
 			<hr>
@@ -81,33 +81,33 @@
 				</button>
 				<hr>
 			</div>
-			<?php if($this->session->userdata("super")=="Administrador"):?>
-			<div class="col-6">
-				<button class="btn btn-nuevo" style="width: 100%; height: 100px;" onclick="nuevaArea()">
-					<i class="fas fa-folder-plus fa-3x"></i>
-				</button>
-				<hr>
-			</div>
-			<div class="col-6">
-				<button class="btn btn-nuevo" style="width: 100%; height: 100px;" onclick="nuevoUser()">
-					<i class="fas fa-user-plus fa-3x"></i>
-				</button>
-				<hr>
-			</div>
-			<div class="col-6">
-				<button class="btn btn-nuevo" style="width: 100%; height: 100px;" onclick="nuevoLink()">
-					<i class="fas fa-paperclip fa-3x"></i>
-				</button>
-				<hr>
-			</div>
-			<div class="col-6">
-				<button class="btn btn-nuevo" style="width: 100%; height: 100px;" onclick="nuevoLink()">
-					<i class="far fa-chart-bar fa-3x"></i>
-				</button>
-				<hr>
-			</div>
+			<?php if ($this->session->userdata("super") == "Administrador") : ?>
+				<div class="col-6">
+					<button class="btn btn-nuevo" style="width: 100%; height: 100px;" onclick="nuevaArea()">
+						<i class="fas fa-folder-plus fa-3x"></i>
+					</button>
+					<hr>
+				</div>
+				<div class="col-6">
+					<button class="btn btn-nuevo" style="width: 100%; height: 100px;" onclick="nuevoUser()">
+						<i class="fas fa-user-plus fa-3x"></i>
+					</button>
+					<hr>
+				</div>
+				<div class="col-6">
+					<button class="btn btn-nuevo" style="width: 100%; height: 100px;" onclick="nuevoLink()">
+						<i class="fas fa-paperclip fa-3x"></i>
+					</button>
+					<hr>
+				</div>
+				<div class="col-6">
+					<button class="btn btn-nuevo" style="width: 100%; height: 100px;" onclick="nuevoLink()">
+						<i class="far fa-chart-bar fa-3x"></i>
+					</button>
+					<hr>
+				</div>
 
-			<?php endif;?>
+			<?php endif; ?>
 		</div>
 	</div>
 	<div class="container" id="contenedor" style="display: none;">

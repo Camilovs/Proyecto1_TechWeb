@@ -4,7 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Principal extends CI_Controller
 {
 	var $cantidadBlog = 5;
-
 	public function __construct()
 	{
 		parent::__construct();
@@ -33,8 +32,7 @@ class Principal extends CI_Controller
 			$id = 0;
 			$super = 0;
 			$areas = array();
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $roles = array();
+			$roles = array();
 			$idAreas = array();
 			$i = 0;
 			//print_r($infor->result());
@@ -82,10 +80,10 @@ class Principal extends CI_Controller
 		}
 	}
 
-	function logout()
+	function log_out()
 	{
 		$this->session->sess_destroy();
-		redirect(base_url() . "Index");
+		redirect(base_url() . "UsoIntranet");
 	}
 	function newArea()
 	{
@@ -289,8 +287,7 @@ class Principal extends CI_Controller
 	{
 		$id 		= $this->input->post("id");
 		$ubicacion 	= $this->input->post("ubicacion");
-        /** @noinspection PhpUnusedLocalVariableInspection */
-        $area 		= $this->input->post("area");
+		$area 		= $this->input->post("area");
 		$nombre 	= $this->input->post("nombre");
 		$this->Modelo->eliminarFichero($id, $ubicacion, $nombre);
 	}
