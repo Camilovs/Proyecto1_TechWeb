@@ -117,7 +117,7 @@
     <div id="footer">
       <div class="container" style="text-align:center; font-size:12px;">
         <p class="muted credit">
-        Developed by <a href="#">####</a></p>
+        Developed by <a href="#">Ignacio Martinez - Camilo Villalobos</a></p>
       </div>
     </div>
   </body>
