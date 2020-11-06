@@ -82,13 +82,11 @@
 						<input type="number" hidden="" id="idRegistro" name="">
 						<input type="number" hidden="" id="saldo" name="">
 						<label>Descripción</label>
-						<input type="text" name="" id="descripcion" class="form-control">
+						<input type="text" name="" placeholder="Nueva descripcion..." id="descripcion" class="form-control">
 						<label>Ingreso</label>
 						<input type="number" name="" id="ingreso" class="form-control">
 						<label>Egreso</label>
 						<input type="number" name="" id="egreso" class="form-control">
-						<label>Fecha</label>
-						<input type="date" name="" id="fecha" class="form-control">
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">

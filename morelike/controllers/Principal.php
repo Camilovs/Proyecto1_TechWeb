@@ -143,6 +143,10 @@ class Principal extends CI_Controller
 		$saldo		 = $this->input->post("saldo");
 		$this->Modelo->editarProcedimiento($id,$descripcion, $ingreso, $egreso,$saldo);
 	}
+	function borrarProcedimiento(){
+		$id = $this->input->post("id");
+		$this->Modelo->borrarProcedimiento($id);
+	}
 
 	function traeMasRegistros()
 	{

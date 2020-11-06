@@ -8,8 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Bootstrap core CSS -->
-    
-    <link href="<?=base_url()?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?=base_url()?>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="<?=base_url()?>js/jquery.form.min.js"></script>
     <!--script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script-->
@@ -121,5 +120,4 @@
       </div>
     </div>
   </body>
-  <script src="<?=base_url()?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </html>

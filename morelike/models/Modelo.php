@@ -89,7 +89,11 @@ class Modelo extends CI_Model
 
     	//$sql = "UPDATE registros set descripcion= '".$descripcion."',ingreso= '".$ingreso."',egreso= '".$egreso."',
     	//		fecha= '".$date."',saldo='".$newSaldo."'";
-}
+	}
+	function borrarProcedimiento($id){
+    	$this->db->where('id',$id);
+    	$this->db->delete('registros');
+	}
     function buscarPacienteRut($rut)
     {
         $this->db->where("rut", $rut);

@@ -72,7 +72,7 @@
 							></button>
 						</td>
 						<td>
-							<button class="btn btn-danger fas fa-trash-alt"></button>
+							<button class="btn btn-danger fas fa-trash-alt" onclick="borrarProcedimiento(<?=$row->id?>)" ></button>
 						</td>
 					</tr>
 				<?php endforeach; ?>
@@ -344,6 +344,15 @@
 			ingreso: ingreso,
 			egreso: egreso,
 			saldo:saldo
+		}, function() {
+			$("#contenedor").hide('fast');
+			nuevoProcedimiento();
+		});
+	}
+	function borrarProcedimiento(id){
+		var	id = id;
+		$.post(base_url + "Principal/borrarProcedimiento", {
+			id:id,
 		}, function() {
 			$("#contenedor").hide('fast');
 			nuevoProcedimiento();
