@@ -110,11 +110,15 @@ class Principal extends CI_Controller
 		$id 	= $this->input->post("id");
 		$this->Modelo->cambiarEstadoArea($estado, $id);
 	}
+
+	/**
+	 * FUNCION QUE SE ACTIVA CUANDO SE ABRE LA TABLA DE REGISTROS CONTABLES
+	 */
 	function nuevoProcedimiento()
 	{
 		//Buscar los últimos procedimientos almacenados...
 		$result = $this->Modelo->buscarUltimosRegistros();
-		$res['data'] = $result->result();
+		$res['data'] = $result->result(); //
 		$res['cant'] = $result->num_rows();
 		$ultimo = 0;
 		foreach ($result->result() as $row) {
@@ -130,6 +134,16 @@ class Principal extends CI_Controller
 		$egreso 	 = $this->input->post("egreso");
 		$this->Modelo->saveProcedimiento($descripcion, $ingreso, $egreso);
 	}
+	function editarProcedimiento()
+	{
+		$id = $this->input->post("id");
+		$descripcion = $this->input->post("descripcion");
+		$ingreso 	 = $this->input->post("ingreso");
+		$egreso 	 = $this->input->post("egreso");
+		$saldo		 = $this->input->post("saldo");
+		$this->Modelo->editarProcedimiento($id,$descripcion, $ingreso, $egreso,$saldo);
+	}
+
 	function traeMasRegistros()
 	{
 		$desde = $this->input->post("desde");
@@ -365,6 +379,7 @@ class Principal extends CI_Controller
 		}
 		echo json_encode($info);
 	}
+
 }
 
 /* End of file welcome.php */

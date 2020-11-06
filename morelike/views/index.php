@@ -8,10 +8,13 @@
 	<meta name="description" content="">
 
 	<title>Desafio</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link href="<?= base_url() ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 	<!--link rel="stylesheet" href="/resources/demos/style.css"-->
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -65,6 +68,38 @@
 				<a href="Salida" class="btn btn-info"><i class="fas fa-sign-out-alt"></i></a><br><text style="font-size: 9px;color:#34b7f1">Último acceso: <?= $this->session->userdata("acceso") ?></text>
 			</div>
 		</div>
+		<!-- Modal Edit -->
+		<div class="modal" id="modalEdit">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Editar Registro</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<!-- Modal body -->
+					<div class="modal-body">
+						<input type="number" hidden="" id="idRegistro" name="">
+						<input type="number" hidden="" id="saldo" name="">
+						<label>Descripción</label>
+						<input type="text" name="" id="descripcion" class="form-control">
+						<label>Ingreso</label>
+						<input type="number" name="" id="ingreso" class="form-control">
+						<label>Egreso</label>
+						<input type="number" name="" id="egreso" class="form-control">
+						<label>Fecha</label>
+						<input type="date" name="" id="fecha" class="form-control">
+					</div>
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" data-dismiss="modal" id="btn_edit"
+						onclick="editarProcedimiento()">Editar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Modal Edit -->
+
 		<div class="row text-center" id="botonesAreas">
 			<div class="col-12">
 				<select id="selectCentros" onchange="entrarArea()" style="width: 100%;">
@@ -81,6 +116,7 @@
 				</button>
 				<hr>
 			</div>
+
 			<?php if ($this->session->userdata("super") == "Administrador") : ?>
 				<div class="col-6">
 					<button class="btn btn-nuevo" style="width: 100%; height: 100px;" onclick="nuevaArea()">

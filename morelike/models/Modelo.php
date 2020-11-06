@@ -79,6 +79,17 @@ class Modelo extends CI_Model
         $data = array("descripcion" => $descripcion, "fecha" => Date("Y-m-d H:i:s"), "ingreso" => $ingreso, "egreso" => $egreso, "saldo" => $saldo);
         $this->db->insert("registros", $data);
     }
+
+    function editarProcedimiento($id,$descripcion, $ingreso, $egreso,$saldo){
+    	$date = Date("Y-m-d H:i:s");
+    	$newSaldo = $saldo + $ingreso - $egreso;
+    	$data = array("descripcion"=>$descripcion, "ingreso"=>$ingreso, "egreso"=>$egreso,"saldo"=>$newSaldo,"fecha"=>$date);
+    	$this->db->where('id',$id);
+		$this->db->update('registros',$data);
+
+    	//$sql = "UPDATE registros set descripcion= '".$descripcion."',ingreso= '".$ingreso."',egreso= '".$egreso."',
+    	//		fecha= '".$date."',saldo='".$newSaldo."'";
+}
     function buscarPacienteRut($rut)
     {
         $this->db->where("rut", $rut);

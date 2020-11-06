@@ -2,6 +2,7 @@
 	<div class="col-12">
 		<h3 class="text-center">Registros Contables</h3>
 	</div>
+
 	<div class="col-12 col-lg-12">
 		<div class="row">
 			<div class="col-4 text-center">
@@ -46,13 +47,14 @@
 	</div>
 	<?php if ($cant > 0) : ?>
 		<div class="col-12 col-lg-12" id="ultimosRegistros">
-			<table class="table table-striped" id="tablaRegistros">
+			<table class="table table-striped table-hover table-condensed table-bordered" id="tablaRegistros">
 				<th>Fecha</th>
 				<th>Descripción</th>
 				<th>Ingreso</th>
 				<th>Egreso</th>
 				<th>Saldo</th>
 				<?php foreach ($data as $row) : ?>
+
 					<tr>
 						<td><?= substr($row->fecha, 0, 10) ?></td>
 						<td><?= $row->descripcion ?></td>
@@ -63,6 +65,15 @@
 						<?php else : ?>
 							<td class="btn-danger"><?= number_format($row->saldo, 0, ",", ".") ?></td>
 						<?php endif; ?>
+						<td>
+							<button class="btn btn-warning fas fa-edit" data-toggle="modal" data-target="#modalEdit"
+									onclick="llenarDatosModal(<?=$row->id?>,<?=$row->ingreso?>,<?=$row->egreso?>,
+									<?=$row->saldo?>)"
+							></button>
+						</td>
+						<td>
+							<button class="btn btn-danger fas fa-trash-alt"></button>
+						</td>
 					</tr>
 				<?php endforeach; ?>
 			</table>
@@ -310,5 +321,32 @@
 	  			id:id, archivo:archivo, nombre:nombre
 	  		}
   		);*/
+	}
+	function llenarDatosModal(id,ingreso,egreso,saldo){
+		console.log(id);
+		$('#idRegistro').val(id);
+		//$('#descripcion').val(descripcion);
+		$('#ingreso').val(ingreso);
+		$('#egreso').val(egreso);
+		$('#saldo').val(saldo);
+
+	}
+	function editarProcedimiento()
+	{
+		var ingreso = $("#ingreso").val();
+		var egreso = $("#egreso").val();
+		var	id = $("#idRegistro").val();
+		var descripcion = $("#descripcion").val();
+		var saldo = $("#saldo").val();
+		$.post(base_url + "Principal/editarProcedimiento", {
+			id:id,
+			descripcion: descripcion,
+			ingreso: ingreso,
+			egreso: egreso,
+			saldo:saldo
+		}, function() {
+			$("#contenedor").hide('fast');
+			nuevoProcedimiento();
+		});
 	}
 </script>
