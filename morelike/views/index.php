@@ -64,39 +64,12 @@
 
 			</div>
 			<div class="col-6 text-right">
-				<text style="color:#128c7e">Bienvenid@ <button type="button" class="btn" style="border:1px solid black;" onclick="openModal()"><?= $this->session->userdata("nombre") ?></button></text>
+				<text style="color:#128c7e">Bienvenid@ <button type="button" class="btn" style="border:1px solid black;" data-toggle="modal" data-target="#exampleModal"
+							onclick="openModal()"><?= $this->session->userdata("nombre") ?></button></text>
 				<a href="Salida" class="btn btn-info"><i class="fas fa-sign-out-alt"></i></a><br><text style="font-size: 9px;color:#34b7f1">Último acceso: <?= $this->session->userdata("acceso") ?></text>
 			</div>
 		</div>
-		<!-- Modal Edit -->
-		<div class="modal" id="modalEdit">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h4 class="modal-title">Editar Registro</h4>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<!-- Modal body -->
-					<div class="modal-body">
-						<input type="number" hidden="" id="idRegistro" name="">
-						<input type="number" hidden="" id="saldo" name="">
-						<label>Descripción</label>
-						<input type="text" name="" placeholder="Nueva descripcion..." id="descripcion" class="form-control">
-						<label>Ingreso</label>
-						<input type="number" name="" id="ingreso" class="form-control">
-						<label>Egreso</label>
-						<input type="number" name="" id="egreso" class="form-control">
-					</div>
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-warning" data-dismiss="modal" id="btn_edit"
-						onclick="editarProcedimiento()">Editar</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End Modal Edit -->
+
 
 		<div class="row text-center" id="botonesAreas">
 			<div class="col-12">
@@ -148,6 +121,34 @@
 
 	</div>
 </body>
+<!-- Modal Edit -->
+<div class="modal" id="modalEdit">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Editar Registro</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<!-- Modal body -->
+			<div class="modal-body">
+				<input type="number" hidden="" id="idRegistro" name="">
+				<input type="number" hidden="" id="saldo" name="">
+				<label>Descripción</label>
+				<input type="text" name="" placeholder="Nueva descripcion..." id="descripcion" class="form-control">
+				<label>Ingreso</label>
+				<input type="number" name="" id="ingreso" class="form-control">
+				<label>Egreso</label>
+				<input type="number" name="" id="egreso" class="form-control">
+			</div>
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-warning" data-dismiss="modal" id="btn_edit"
+						onclick="editarProcedimiento()">Editar</button>
+			</div>
+		</div>
+	</div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -211,7 +212,6 @@
 <script charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
 <script type="text/javascript">
-	var pacientes;
 	$(document).ready(function() {});
 
 	function nuevoProcedimiento() {
@@ -248,44 +248,6 @@
 	function entrarArea() {
 		var centro = $("#selectCentros").val();
 		$(".btnDisabled").attr("disabled", false);
-	}
-
-	function buscar() {
-		$("#rutPacienteBusquedaModal").val('');
-		$("#modalBusqueda").modal("show");
-	}
-
-	function buscarPacienteRutModal() {
-		var rut = $("#rutPacienteBusquedaModal").val();
-		rut = rut.split(" ");
-		rut = rut[0];
-		$.post(
-			base_url + "Principal/buscarFichasPaciente", {
-				rut: rut
-			},
-			function(html, response) {
-				buscarPacienteRut(rut);
-				$("#contenedor").html('');
-				$("#modalBusqueda").modal("hide");
-				$("#contenedor").html(html, response);
-				$("#contenedor").show('fast');
-			}
-		);
-	}
-
-	function buscarPacienteRut(rut) {
-		$.post(base_url + "Principal/buscarPacienteRut", {
-				rut: rut
-			},
-			function(data) {
-				$("#rutB").val(data[0].rut);
-				$("#nombreB").val(data[0].nombre);
-				$("#apellidosB").val(data[0].apellido);
-				$("#fNacB").val(data[0].fNac);
-				$("#edadB").val(data[0].edad);
-				$("#telefonoB").val(data[0].telefono);
-				$("#direccionB").val(data[0].domicilio);
-			}, 'json')
 	}
 
 	function openModal() {
