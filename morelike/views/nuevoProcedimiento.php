@@ -17,13 +17,13 @@
 		</div>
 		<div class="row">
 			<div class="col-4">
-				<input class="form-control" type="text" id="descripcion">
+				<input class="form-control" type="text" id="adddescripcion">
 			</div>
 			<div class="col-4">
-				<input class="form-control" type="number" id="ingreso" onchange="formato('ingreso')">
+				<input class="form-control" type="number" id="addingreso" onchange="formato('ingreso')">
 			</div>
 			<div class="col-4">
-				<input class="form-control" type="number" id="egreso" onchange="formato('egreso')">
+				<input class="form-control" type="number" id="addegreso" onchange="formato('egreso')">
 			</div>
 		</div>
 		<div class="row">
@@ -53,6 +53,8 @@
 				<th>Ingreso</th>
 				<th>Egreso</th>
 				<th>Saldo</th>
+				<th>Editar</th>
+				<th>Borrar</th>
 				<?php foreach ($data as $row) : ?>
 
 					<tr>
@@ -83,31 +85,6 @@
 	<?php endif; ?>
 
 </div>
-<style type="text/css">
-	.textArea {
-		border: 1px solid #ccc;
-		border-radius: 10px;
-	}
-
-	.wrapper {
-		position: relative;
-		width: 402px;
-		height: 202px;
-		-moz-user-select: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-	}
-
-	.signature-pad {
-		position: absolute;
-		left: 0;
-		top: 0;
-		width: 400px;
-		height: 200px;
-		background-color: white;
-	}
-</style>
 <script type="text/javascript" src="js/rut.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -203,9 +180,9 @@
 
 	function guardarNuevoProcedimiento() {
 
-		var descripcion = $("#descripcion").val();
-		var ingreso = ($("#ingreso").val().split(".")).join("");
-		var egreso = ($("#egreso").val().split(".")).join("");
+		var descripcion = $("#adddescripcion").val();
+		var ingreso = ($("#addingreso").val().split(".")).join("");
+		var egreso = ($("#addegreso").val().split(".")).join("");
 
 		var validation = {
 			isEmailAddress: function(str) {
@@ -272,7 +249,6 @@
 
 	function formato(campo) {
 		var cadena = $("#" + campo).val();
-
 		$("#" + campo).val(cadena);
 	}
 

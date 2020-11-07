@@ -161,55 +161,6 @@ class Principal extends CI_Controller
 		$res['ultimo'] = $ultimo;
 		echo json_encode($res);
 	}
-
-	function saveImagen()
-	{
-		$nombre = Date("YmdHis") . "orden";
-		//echo $nombre;
-		$id = "ordenMedica";
-		if (!file_exists("uploads/" . $id)) {
-			mkdir("uploads/" . $id, 0777, true);
-		}
-		$config = array(
-			'upload_path' => "uploads/" . $id,
-			'file_name' => $nombre,
-			'allowed_types' => "gif|jpg|png|jpeg", //|pdf|doc|docx|rar|zip|txt|xlsx|xls",
-			'overwrite' => TRUE,
-			'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
-			'max_height' => "6000",
-			'max_width' => "6000"
-		);
-		//echo $config['file_name'];
-		//echo $config['file_ext'];
-		$this->load->library('upload', $config);
-		if ($this->upload->do_upload("userFile")) {
-			$nombre = $this->upload->data('file_name');
-			echo json_encode(array("error" => "", "nombre" => $nombre, "estado" => "ok"));
-		} else {
-			$error = array('error' => $this->upload->display_errors(), "nombre" => "", "estado" => "fail");
-			echo json_encode($error);
-		}
-	}
-	function buscarPacienteRut()
-	{
-		$rut = $this->input->post("rut");
-		$res = $this->Modelo->buscarPacienteRut($rut);
-		echo json_encode($res);
-	}
-	function traePacientes()
-	{
-		$res = $this->Modelo->buscarPacientes();
-		//print_r($res);
-		echo json_encode($res);
-	}
-	function buscarFichasPaciente()
-	{
-		$rut = $this->input->post("rut");
-		$res = $this->Modelo->buscarFichasPaciente($rut);
-		$data['result']		= $res->result();
-		$data['num_rows']	= $res->num_rows();
-		$this->load->view("resumenFichas", $data);
-	}
 	function newUser()
 	{
 		$res['users'] = $this->Modelo->listarUsers();
